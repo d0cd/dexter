@@ -1,0 +1,26 @@
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.provider "virtualbox" do |vb|
+      vb.memory = "8192"
+  config.vm.synced_folder "./../", "/home/vagrant/dexter/", create: true
+  end
+  
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    sudo apt-get update -y && 
+    sudo apt-get upgrade -y &&
+    sudo apt-get install clang-7 llvm-7 llvm-7-tools openjdk-8-jdk --yes
+
+    wget https://github.com/halide/Halide/releases/download/v11.0.1/Halide-11.0.1-x86-64-linux-85c1b91c47ce15aab0d9502d955e48615f3bcee0.tar.gz
+    tar xvf Halide-11.0.1-x86-64-linux-85c1b91c47ce15aab0d9502d955e48615f3bcee0.tar.gz
+    mv ./Halide-11.0.1-x86-64-linux-85c1b91c47ce15aab0d9502d955e48615f3bcee0.tar.gz ~/halide
+    echo "export PATH=$PATH:~/halide/bin" >> ~/.profile
+    echo "export CPATH=$CPATH:~/halide/include" >> ~/.profile
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/halide/lib" >> ~/.profile
+
+    cd /home/vagrant/dexter/src/dexter/frontend/clang
+    make
+    cd ~/
+
+    SHELL
+  end

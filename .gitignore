@@ -8,4 +8,5 @@ test/optimized/**
 test/pipeline/**
 test/legacy/**
 src/META-INF/**
+vagrant/.vagrant/**
 out/**
