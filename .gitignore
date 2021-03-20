@@ -3,7 +3,8 @@ build/codegen/**
 build/META-INF/**
 build/production/**
 src/dexter/frontend/clang/obj/**
-test/basic/convolve.cpp
+src/dexter/frontend/clang/bin/*
+test/basic/**
 test/optimized/**
 test/pipeline/**
 test/legacy/**
