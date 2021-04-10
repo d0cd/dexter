@@ -12,8 +12,6 @@ Vagrant.configure(2) do |config|
     sudo apt-get install -y \
       openjdk-8-jdk \
       clang-7 \
-      llvm-7 \
-      llvm-7-tools \
       g++ \
       libncurses5-dev \
       libncursesw5-dev \
@@ -21,7 +19,7 @@ Vagrant.configure(2) do |config|
       bison \
       make \
       ant \
-      wget #libclang-7-dev
+      libclang-7-dev
 
     sudo mv /usr/bin/java /usr/bin/java11
     sudo ln -s /usr/lib/jvm/java-8-openjdk-amd64/bin/java /usr/bin/java
@@ -32,6 +30,7 @@ Vagrant.configure(2) do |config|
     rm sketch-1.7.5.tar.gz
     mv sketch-1.7.5 ~/sketch
     cd ./sketch
+    cd ./sketch-backend
     chmod +x ./configure
     ./configure
     make
